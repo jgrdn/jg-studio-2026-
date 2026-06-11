@@ -20,7 +20,7 @@ import {
   formatBytes,
   type GifLoopMode,
 } from '../lib/gifConvertor/convertVideoToGif'
-import { GIF_MAKER_ORIGIN } from '../lib/gifConvertor/host'
+import { GIF_MAKER_OG_IMAGE, GIF_MAKER_ORIGIN } from '../lib/gifConvertor/host'
 import { isAcceptedMediaFile, isGifMediaFile } from '../lib/gifConvertor/mediaTypes'
 import { StudioMark } from '../components/StudioMark'
 import { formatTime } from '../lib/gifConvertor/formatTime'
@@ -347,12 +347,23 @@ export function GifConvertorPage() {
           name="description"
           content="Gif Maker by JG Studio. Convert video or GIF in your browser. Trim, crop, tune frame rate and colour. Nothing leaves your device."
         />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Gif Maker" />
         <meta property="og:title" content="Gif Maker - by JG Studio" />
         <meta
           property="og:description"
           content="Convert video or GIF in your browser. Trim, crop, tune frame rate and colour. Nothing leaves your device."
         />
         <meta property="og:url" content={GIF_MAKER_ORIGIN} />
+        <meta property="og:image" content={GIF_MAKER_OG_IMAGE} />
+        <meta property="og:image:alt" content="Gif Maker — Drop footage. Ship a GIF." />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Gif Maker - by JG Studio" />
+        <meta
+          name="twitter:description"
+          content="Convert video or GIF in your browser. Trim, crop, tune frame rate and colour. Nothing leaves your device."
+        />
+        <meta name="twitter:image" content={GIF_MAKER_OG_IMAGE} />
         <link rel="canonical" href={GIF_MAKER_ORIGIN} />
         <meta name="theme-color" content="#060606" />
         <meta
