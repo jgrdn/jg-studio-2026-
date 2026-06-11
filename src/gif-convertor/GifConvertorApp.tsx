@@ -1,8 +1,10 @@
 import { useEffect } from 'react'
+import { scrubPortfolioHead } from '../lib/gifConvertor/seo'
 import { GifConvertorPage } from './GifConvertorPage'
 
 export function GifConvertorApp() {
   useEffect(() => {
+    scrubPortfolioHead()
     document.documentElement.classList.add('gif-tool-root')
     document.body.classList.add('gif-tool-page')
     return () => {

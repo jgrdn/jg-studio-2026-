@@ -9,6 +9,18 @@ const root = path.resolve(__dirname, '..')
 const distDir = path.join(root, 'dist')
 const ssrDir = path.join(root, 'dist-ssr')
 
+if (process.env.VITE_GIF_MAKER_ONLY === 'true') {
+  const gifMakerHtml = path.join(distDir, 'index.gif-maker.html')
+  const indexHtml = path.join(distDir, 'index.html')
+  try {
+    await fs.rename(gifMakerHtml, indexHtml)
+  } catch {
+    // Already index.html when the template filename matches.
+  }
+  console.log('Skipping portfolio prerender (gif-maker-only build).')
+  process.exit(0)
+}
+
 const templatePath = path.join(distDir, 'index.html')
 const template = await fs.readFile(templatePath, 'utf8')
 

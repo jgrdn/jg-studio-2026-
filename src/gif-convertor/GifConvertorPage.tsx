@@ -21,6 +21,13 @@ import {
   type GifLoopMode,
 } from '../lib/gifConvertor/convertVideoToGif'
 import { GIF_MAKER_OG_IMAGE, GIF_MAKER_ORIGIN } from '../lib/gifConvertor/host'
+import {
+  GIF_MAKER_DESCRIPTION,
+  GIF_MAKER_JSON_LD,
+  GIF_MAKER_OG_ALT,
+  GIF_MAKER_SITE_NAME,
+  GIF_MAKER_TITLE,
+} from '../lib/gifConvertor/seo'
 import { isAcceptedMediaFile, isGifMediaFile } from '../lib/gifConvertor/mediaTypes'
 import { StudioMark } from '../components/StudioMark'
 import { formatTime } from '../lib/gifConvertor/formatTime'
@@ -341,35 +348,29 @@ export function GifConvertorPage() {
 
   return (
     <div className="gif-tool">
-      <Helmet>
-        <title>Gif Maker - by JG Studio</title>
-        <meta
-          name="description"
-          content="Gif Maker by JG Studio. Convert video or GIF in your browser. Trim, crop, tune frame rate and colour. Nothing leaves your device."
-        />
+      <Helmet prioritizeSeoTags>
+        <html lang="en-GB" />
+        <title>{GIF_MAKER_TITLE}</title>
+        <meta name="description" content={GIF_MAKER_DESCRIPTION} />
+        <meta name="robots" content="index,follow,max-image-preview:large" />
+        <link rel="canonical" href={`${GIF_MAKER_ORIGIN}/`} />
         <meta property="og:type" content="website" />
-        <meta property="og:site_name" content="Gif Maker" />
-        <meta property="og:title" content="Gif Maker - by JG Studio" />
-        <meta
-          property="og:description"
-          content="Convert video or GIF in your browser. Trim, crop, tune frame rate and colour. Nothing leaves your device."
-        />
-        <meta property="og:url" content={GIF_MAKER_ORIGIN} />
+        <meta property="og:site_name" content={GIF_MAKER_SITE_NAME} />
+        <meta property="og:title" content={GIF_MAKER_TITLE} />
+        <meta property="og:description" content={GIF_MAKER_DESCRIPTION} />
+        <meta property="og:url" content={`${GIF_MAKER_ORIGIN}/`} />
         <meta property="og:image" content={GIF_MAKER_OG_IMAGE} />
-        <meta property="og:image:alt" content="Gif Maker — Drop footage. Ship a GIF." />
+        <meta property="og:image:alt" content={GIF_MAKER_OG_ALT} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Gif Maker - by JG Studio" />
-        <meta
-          name="twitter:description"
-          content="Convert video or GIF in your browser. Trim, crop, tune frame rate and colour. Nothing leaves your device."
-        />
+        <meta name="twitter:title" content={GIF_MAKER_TITLE} />
+        <meta name="twitter:description" content={GIF_MAKER_DESCRIPTION} />
         <meta name="twitter:image" content={GIF_MAKER_OG_IMAGE} />
-        <link rel="canonical" href={GIF_MAKER_ORIGIN} />
         <meta name="theme-color" content="#060606" />
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1.0, viewport-fit=cover"
         />
+        <script type="application/ld+json">{JSON.stringify(GIF_MAKER_JSON_LD)}</script>
       </Helmet>
 
       <div className="gif-tool__grain" aria-hidden />
