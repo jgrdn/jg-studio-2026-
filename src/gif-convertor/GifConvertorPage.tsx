@@ -20,7 +20,12 @@ import {
   formatBytes,
   type GifLoopMode,
 } from '../lib/gifConvertor/convertVideoToGif'
-import { GIF_MAKER_OG_IMAGE, GIF_MAKER_ORIGIN } from '../lib/gifConvertor/host'
+import {
+  GIF_MAKER_OG_IMAGE,
+  GIF_MAKER_OG_IMAGE_HEIGHT,
+  GIF_MAKER_OG_IMAGE_WIDTH,
+  GIF_MAKER_ORIGIN,
+} from '../lib/gifConvertor/host'
 import {
   GIF_MAKER_DESCRIPTION,
   GIF_MAKER_JSON_LD,
@@ -360,6 +365,10 @@ export function GifConvertorPage() {
         <meta property="og:description" content={GIF_MAKER_DESCRIPTION} />
         <meta property="og:url" content={`${GIF_MAKER_ORIGIN}/`} />
         <meta property="og:image" content={GIF_MAKER_OG_IMAGE} />
+        <meta property="og:image:secure_url" content={GIF_MAKER_OG_IMAGE} />
+        <meta property="og:image:type" content="image/jpeg" />
+        <meta property="og:image:width" content={String(GIF_MAKER_OG_IMAGE_WIDTH)} />
+        <meta property="og:image:height" content={String(GIF_MAKER_OG_IMAGE_HEIGHT)} />
         <meta property="og:image:alt" content={GIF_MAKER_OG_ALT} />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={GIF_MAKER_TITLE} />

@@ -1,4 +1,9 @@
-import { GIF_MAKER_OG_IMAGE, GIF_MAKER_ORIGIN } from './host'
+import {
+  GIF_MAKER_OG_IMAGE,
+  GIF_MAKER_OG_IMAGE_HEIGHT,
+  GIF_MAKER_OG_IMAGE_WIDTH,
+  GIF_MAKER_ORIGIN,
+} from './host'
 
 export const GIF_MAKER_SITE_NAME = 'Gif Maker'
 

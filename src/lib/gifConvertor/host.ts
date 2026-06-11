@@ -1,7 +1,9 @@
 /** Production custom domain — gifmaker.jg.studio */
 export const GIF_MAKER_SUBDOMAIN = 'gifmaker'
 export const GIF_MAKER_ORIGIN = 'https://gifmaker.jg.studio'
-export const GIF_MAKER_OG_IMAGE = `${GIF_MAKER_ORIGIN}/gif-maker-og.jpg`
+export const GIF_MAKER_OG_IMAGE = `${GIF_MAKER_ORIGIN}/gif-maker-share.jpg`
+export const GIF_MAKER_OG_IMAGE_WIDTH = 1024
+export const GIF_MAKER_OG_IMAGE_HEIGHT = 476
 
 /** Older hostname; still recognised so nothing breaks during DNS cutover. */
 const LEGACY_GIF_MAKER_SUBDOMAINS = ['gif-convertor'] as const
