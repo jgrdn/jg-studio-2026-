@@ -31,8 +31,14 @@ function isDevGifMakerPath(pathname: string): boolean {
   )
 }
 
+/** Set `VITE_GIF_MAKER_ONLY=true` on a Vercel project that only hosts the tool. */
+export function isGifMakerOnlyDeploy(): boolean {
+  return import.meta.env.VITE_GIF_MAKER_ONLY === 'true'
+}
+
 /** Custom domain in prod; `/gifmaker` or `/gif-convertor` in local dev. */
 export function isGifConvertorContext(pathname?: string, hostname?: string): boolean {
+  if (isGifMakerOnlyDeploy()) return true
   if (isGifMakerHost(hostname)) return true
   const path = pathname ?? (typeof window !== 'undefined' ? window.location.pathname : '')
   return import.meta.env.DEV && isDevGifMakerPath(path)
