@@ -1,0 +1,18 @@
+.studio-mark {
+  flex: 0 0 auto;
+  font-family: var(--font-headline, 'Season Mix TRIAL', Georgia, serif);
+  font-size: clamp(1.12rem, 2.9vw, 1.32rem);
+  font-weight: 700;
+  letter-spacing: var(--headline-tracking, -0.03em);
+  line-height: 1;
+  text-decoration: none;
+  color: var(--text-strong, #ffffff);
+  transition: color 0.24s ease, opacity 0.24s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .studio-mark:hover {
+    color: var(--text, rgba(255, 255, 255, 0.74));
+    opacity: 0.88;
+  }
+}
