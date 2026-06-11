@@ -12,6 +12,12 @@ export type AspectRatioPreset =
 
 export type CropHandle = 'nw' | 'n' | 'ne' | 'e' | 'se' | 's' | 'sw' | 'w'
 
+const CORNER_CROP_HANDLES: CropHandle[] = ['nw', 'ne', 'se', 'sw']
+
+export function isCornerCropHandle(handle: CropHandle): boolean {
+  return CORNER_CROP_HANDLES.includes(handle)
+}
+
 export type NormalizedCrop = {
   /** 0–1 from left */
   x: number

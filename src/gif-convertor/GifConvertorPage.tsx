@@ -314,6 +314,13 @@ export function GifConvertorPage() {
     resetOutput()
   }
 
+  const onCornerResizeStart = useCallback(() => {
+    if (aspectPreset === 'free') return
+    setAspectPreset('free')
+    setCrop((current) => (isFullFrameCrop(current) ? defaultEditableCrop() : current))
+    resetOutput()
+  }, [aspectPreset, resetOutput, setAspectPreset, setCrop])
+
   async function onConvert() {
     if (!file || !meta) return
 
@@ -475,6 +482,7 @@ export function GifConvertorPage() {
                       crop={crop}
                       lockAspect={lockAspect}
                       onCropChange={onCropChange}
+                      onCornerResizeStart={onCornerResizeStart}
                     />
                   </div>
                 ) : null}

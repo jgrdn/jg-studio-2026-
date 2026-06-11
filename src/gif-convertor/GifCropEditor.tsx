@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState, type RefObject } from 'react'
 import { formatTime } from '../lib/gifConvertor/formatTime'
 import type { CropHandle, NormalizedCrop } from '../lib/gifConvertor/crop'
-import { moveCrop, resizeCrop } from '../lib/gifConvertor/crop'
+import { isCornerCropHandle, moveCrop, resizeCrop } from '../lib/gifConvertor/crop'
 
 const HANDLES: CropHandle[] = ['nw', 'n', 'ne', 'e', 'se', 's', 'sw', 'w']
 
@@ -27,6 +27,7 @@ type Props = {
   crop: NormalizedCrop
   lockAspect: number | null
   onCropChange: (crop: NormalizedCrop) => void
+  onCornerResizeStart?: () => void
 }
 
 function PlayIcon() {
@@ -56,12 +57,18 @@ export function GifCropEditor({
   crop,
   lockAspect,
   onCropChange,
+  onCornerResizeStart,
 }: Props) {
   const dragRef = useRef<DragState | null>(null)
   const frameRef = useRef<HTMLDivElement>(null)
   const scrubbingRef = useRef(false)
+  const freeCornerResizeRef = useRef(false)
+  const lockAspectRef = useRef(lockAspect)
   const onCropChangeRef = useRef(onCropChange)
+  const onCornerResizeStartRef = useRef(onCornerResizeStart)
+  lockAspectRef.current = lockAspect
   onCropChangeRef.current = onCropChange
+  onCornerResizeStartRef.current = onCornerResizeStart
 
   const [playing, setPlaying] = useState(false)
   const [currentTime, setCurrentTime] = useState(0)
@@ -98,6 +105,9 @@ export function GifCropEditor({
       e.preventDefault()
       e.stopPropagation()
       e.currentTarget.setPointerCapture(e.pointerId)
+      const cornerResize = isCornerCropHandle(handle)
+      freeCornerResizeRef.current = cornerResize
+      if (cornerResize) onCornerResizeStartRef.current?.()
       dragRef.current = {
         mode: 'resize',
         pointerId: e.pointerId,
@@ -128,8 +138,9 @@ export function GifCropEditor({
         return
       }
 
+      const effectiveLock = freeCornerResizeRef.current ? null : lockAspectRef.current
       onCropChangeRef.current(
-        resizeCrop(drag.crop, drag.handle, dx, dy, lockAspect, videoWidth, videoHeight),
+        resizeCrop(drag.crop, drag.handle, dx, dy, effectiveLock, videoWidth, videoHeight),
       )
     }
 
@@ -137,6 +148,7 @@ export function GifCropEditor({
       const drag = dragRef.current
       if (!drag || e.pointerId !== drag.pointerId) return
       dragRef.current = null
+      freeCornerResizeRef.current = false
     }
 
     window.addEventListener('pointermove', onPointerMove, { passive: false })
@@ -148,7 +160,7 @@ export function GifCropEditor({
       window.removeEventListener('pointerup', endDrag)
       window.removeEventListener('pointercancel', endDrag)
     }
-  }, [lockAspect, videoHeight, videoWidth])
+  }, [videoHeight, videoWidth])
 
   useEffect(() => {
     const video = videoRef.current
